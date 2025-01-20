@@ -1,40 +1,41 @@
-let SURNAME = prompt("Введите фамилию");
-while (!SURNAME) {
+let surname = prompt("Введите фамилию");
+while (!surname) {
   alert("Введите корректную фамилию");
-  SURNAME = prompt("Введите фамилию");
+  surname = prompt("Введите фамилию");
 }
-let NAME = prompt("Введите имя");
-while (!NAME) {
+let name = prompt("Введите имя");
+while (!name) {
   alert("Введите корректное имя");
-  NAME = prompt("Введите корректное имя");
+  name = prompt("Введите корректное имя");
 }
-let MIDDLE_NAME = prompt("Введите отчество");
-while (!MIDDLE_NAME) {
+let middleName = prompt("Введите отчество");
+while (!middleName) {
   alert("Введите корректное отчество");
-  MIDDLE_NAME = prompt("Введите отчество");
+  middleName = prompt("Введите отчество");
 }
-let AGE = parseInt(prompt("Введите возраст"));
-while (AGE == 0 || Number.isNaN(AGE)) {
+let age = parseInt(prompt("Введите возраст"));
+while (age == 0 || Number.isNaN(age)) {
   alert("Введите корректный возраст");
-  AGE = parseInt(prompt("Введите возраст"));
+  age = parseInt(prompt("Введите возраст"));
 }
-let GENDER = confirm(
+let genderQuestion = confirm(
   "Ваш пол - мужской? (нажмите OK, если да и нажмите ОТМЕНА, если нет)"
 );
 let pension;
+let gender;
 
 //Пусть женщины выходят на пенсию в 55, а мужчины в 60
 
-if (GENDER) {
-  GENDER = "мужской";
-  if (AGE < 60) {
+if (genderQuestion) {
+  gender = "мужской";
+  if (age < 60) {
     pension = "нет";
   } else {
     pension = "да";
   }
 } else {
-  GENDER = "женский";
-  if (AGE < 55) {
+  gender = "женский";
+  if (age < 55) {
     pension = "нет";
   } else {
     pension = "да";
@@ -43,9 +44,9 @@ if (GENDER) {
 
 //alert
 
-alert(`ваше ФИО: ${SURNAME} ${NAME} ${MIDDLE_NAME}\n
-ваш возраст в годах: ${AGE}\n
-ваш возраст в днях: ${AGE * 365}\n
-через 5 лет вам будет: ${AGE + 5}\n
-ваш пол: ${GENDER}\n
+alert(`ваше ФИО: ${surname} ${name} ${middleName}\n
+ваш возраст в годах: ${age}\n
+ваш возраст в днях: ${age * 365}\n
+через 5 лет вам будет: ${age + 5}\n
+ваш пол: ${gender}\n
 вы на пенсии: ${pension}`);
