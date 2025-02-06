@@ -23,20 +23,44 @@ function vowelCounter(s) {
     "Я",
     "я",
   ];
-  let count = {};
-
-  for (let i = 0; i < s.length; i++) {
-    if (!(s[i] in count)) {
-      count[s[i]] = 0;
-    }
-    count[s[i]]++;
-  }
-  let sum = 0;
-  for (let i = 0; i < VOWELS.length; i++) {
-    if (VOWELS[i] in count) {
-      sum = sum + count[VOWELS[i]];
+  let count = 0;
+  for (let i = 0; i < string.length; i++) {
+    if (VOWELS.indexOf(string[i]) != -1) {
+      count++;
     }
   }
-  return sum;
+  return count;
 }
-console.log("количество гласных: " + vowelCounter(string));
+function vowelCounter1(s) {
+  const VOWELS = [
+    "А",
+    "а",
+    "Е",
+    "е",
+    "Ё",
+    "ё",
+    "И",
+    "и",
+    "О",
+    "о",
+    "У",
+    "у",
+    "Э",
+    "э",
+    "Ю",
+    "ю",
+    "Ы",
+    "ы",
+    "Я",
+    "я",
+  ];
+  let count = 0;
+  for (let i = 0; i < string.length; i++) {
+    if (VOWELS.includes(string[i])) {
+      count++;
+    }
+  }
+  return count;
+}
+console.log("количество гласных(indexOf): " + vowelCounter(string));
+console.log("количество гласных(includes): " + vowelCounter1(string));
