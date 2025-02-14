@@ -1,10 +1,11 @@
 let string = prompt("Введите строку", "в этой строке девять ГЛАСНЫХ БУКВ!");
-string = string.toLowerCase().split(""); //преобразовала в массив
+string = string.toLowerCase(); //преобразовала в СТРОКУ со строчными буквами
 
 // 1 метод
 function useForEach(s) {
   const arr = ["а", "е", "ё", "и", "о", "у", "э", "ю", "ы", "я"];
   let count = 0;
+  s = s.split("");
   s.forEach((v) => {
     let answer = arr.includes(v);
     if (answer) {
@@ -17,12 +18,14 @@ function useForEach(s) {
 // 2 метод
 function useFilter(s) {
   const arr = ["а", "е", "ё", "и", "о", "у", "э", "ю", "ы", "я"];
+  s = s.split("");
   let arr1 = s.filter((v) => arr.includes(v));
   return arr1.length;
 }
 // 3 метод
 function useReduce(s) {
   const arr = ["а", "е", "ё", "и", "о", "у", "э", "ю", "ы", "я"];
+  s = s.split("");
   function vowel(r, v) {
     if (arr.includes(v)) {
       r++;
