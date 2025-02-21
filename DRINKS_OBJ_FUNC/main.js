@@ -67,11 +67,14 @@ function inputDrinkInfo() {
 //«получение информации о напитке»
 function getDrinkInfo() {
   let nameDrink = prompt("Введите название напитка", "Мохито");
-  if (drinkStorage.getValue(nameDrink)) {
+
+  //создала переменную, вызвала один раз
+  let value = drinkStorage.getValue(nameDrink);
+  if (value) {
     alert(
       `напиток ${nameDrink}
-алкогольный: ${drinkStorage.getValue(nameDrink).alcohol}
-рецепт приготовления: ${drinkStorage.getValue(nameDrink).recipe}`
+алкогольный: ${value.alcohol}
+рецепт приготовления: ${value.recipe}`
     );
   } else {
     alert(`Такой напиток отсутствует`);
