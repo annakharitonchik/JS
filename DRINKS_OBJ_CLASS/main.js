@@ -1,33 +1,34 @@
-function ObjStorageFunc() {
-  this.Storage = {};
-
+class ObjStorageClass {
+  constructor() {
+    this.Storage = {};
+  }
   //addValue(key,value)
-  this.addValue = function (key, value) {
+  addValue(key, value) {
     this.Storage[key] = value;
-  };
+  }
 
   //getValue(key)
-  this.getValue = function (key) {
+  getValue(key) {
     return this.Storage[key];
-  };
+  }
 
   //deleteValue(key)
-  this.deleteValue = function (key) {
+  deleteValue(key) {
     if (this.Storage.hasOwnProperty(key)) {
       delete this.Storage[key];
       return true;
     } else {
       return false;
     }
-  };
+  }
 
   //getKeys()
-  this.getKeys = function () {
+  getKeys() {
     return Object.keys(this.Storage);
-  };
+  }
 }
-//объект drinkStorage класса ObjStorageFunc
-const drinkStorage = new ObjStorageFunc();
+// объект drinkStorage класса ObjStorageClass
+const drinkStorage = new ObjStorageClass();
 //добавила напитки и информацию
 drinkStorage.addValue("Маргарита", {
   alcohol: "да",
@@ -100,7 +101,3 @@ function listDrinks() {
     alert(arrKeys.join(", "));
   }
 }
-
-// хочу доработать:
-// убрать чувствительность к регистру
-// не давать пользователю ввести пустую строку, что-то неверное
