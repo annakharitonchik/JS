@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>drag&amp;drop</title>
+  </head>
+  <body style="min-height: 100vh">
+    <img src="http://fe.it-academy.by/Sites/0000007/sax.jpg" />
+    <img
+      src="http://fe.it-academy.by/Sites/0000007/Yin_and_Yang.png"
+      width="100"
+      style="vertical-align: 20px"
+    />
+    <img
+      src="http://fe.it-academy.by/Sites/0000007/Man-and-woman.png"
+      width="150"
+    />
+    <img
+      src="http://fe.it-academy.by/Sites/0000007/No_smoking.png"
+      style="padding-left: 50px"
+    />
+
+    <script>
+      // здесь ваш код
+      let draggedImg = null;
+      let ShiftX;
+      let ShiftY;
+      let index = 1;
+      document.querySelectorAll("img").forEach((image) => {
+        image.style.top = image.offsetTop + "px";
+        image.style.left = image.offsetLeft + "px";
+      });
+      document.querySelectorAll("img").forEach((image) => {
+        image.style.position = "absolute";
+        image.onmousedown = DragStart;
+        image.onmouseup = DragEnd;
+        image.onmouseover = Grab;
+        image.style.zIndex = index;
+      });
+      function Move(eo) {
+        eo.preventDefault();
+        eo = eo || window.event;
+        // двигаем картинку
+        // ее новые координаты есть координаты касания минус запомненная разница
+        draggedImg.style.left = eo.pageX - ShiftX + "px";
+        draggedImg.style.top = eo.pageY - ShiftY + "px";
+      }
+      function Grab(eo) {
+        eo.preventDefault();
+        eo = eo || window.event;
+        eo.currentTarget.style.cursor = "grab";
+      }
+      function DragStart(eo) {
+        eo = eo || window.event;
+        draggedImg = eo.target;
+        eo.preventDefault();
+        // запоминаем разницу между координатами курсора и координатами картинки
+        ShiftX = eo.pageX - draggedImg.offsetLeft;
+        ShiftY = eo.pageY - draggedImg.offsetTop;
+        draggedImg.style.zIndex = ++index;
+        draggedImg.style.cursor = "grab";
+        document.onmousemove = Move;
+      }
+      function DragEnd(eo) {
+        eo = eo || window.event;
+        eo.preventDefault();
+        document.onmousemove = null;
+        draggedImg.style.cursor = "auto";
+        draggedImg = null;
+      }
+    </script>
+  </body>
+</html>
