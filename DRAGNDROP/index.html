@@ -26,18 +26,21 @@
       let ShiftX;
       let ShiftY;
       let index = 1;
+      window.onload = () => {
+        document.querySelectorAll("img").forEach((image) => {
+          image.style.top = image.offsetTop + "px";
+          image.style.left = image.offsetLeft + "px";
+        });
 
-      document.querySelectorAll("img").forEach((image) => {
-        image.style.top = image.offsetTop + "px";
-        image.style.left = image.offsetLeft + "px";
-      });
-      document.querySelectorAll("img").forEach((image) => {
-        image.style.position = "absolute";
-        image.onmousedown = DragStart;
-        image.onmouseup = DragEnd;
-        image.onmouseover = Grab;
-        image.style.zIndex = index;
-      });
+        document.querySelectorAll("img").forEach((image) => {
+          image.style.position = "absolute";
+          image.onmousedown = DragStart;
+          image.onmouseup = DragEnd;
+          image.onmouseover = Grab;
+          image.style.zIndex = index;
+        });
+      };
+
       function Move(eo) {
         eo.preventDefault();
         eo = eo || window.event;
