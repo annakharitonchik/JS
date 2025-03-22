@@ -226,7 +226,7 @@ function validDate(isErr) {
     message.textContent = "Поле пустое!";
     errCount++;
     if (isErr) {
-      formElem.validDate.focus();
+      formElem.sitedaterun.focus();
     }
   } else {
     message.style.display = "none";
@@ -297,7 +297,7 @@ function validPayment(isErr) {
     message.textContent = "Поле пустое!";
     errCount++;
     if (isErr) {
-      formElem.payment.focus();
+      formElem.payment[0].focus();
     }
   } else {
     message.style.display = "none";
@@ -309,13 +309,14 @@ function validVote(isErr) {
   const message = formElem.votes.nextElementSibling;
   message.style.display = "inline-block";
   const value = formElem.votes.value;
-  if (formElem.votes == "checked") {
+  if (formElem.votes.checked) {
     message.style.display = "none";
   } else {
     message.textContent = "Поле пустое!";
     errCount++;
     if (isErr) {
       formElem.votes.focus();
+      formElem.votes.style = "border: blue";
     }
   }
   return errCount;
