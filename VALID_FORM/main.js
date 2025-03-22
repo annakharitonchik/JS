@@ -141,12 +141,12 @@ formElem.siteurl.addEventListener("blur", () => validURL(false));
 formElem.sitedaterun.addEventListener("blur", () => validDate(false));
 formElem.visitors.addEventListener("blur", () => validNumVisit(false));
 formElem.email.addEventListener("blur", () => validEmail(false));
-formElem.division.addEventListener("blur", () => validRubric(false));
+formElem.division.addEventListener("change", () => validRubric(false));
 const arrButtons = formElem.payment;
 arrButtons.forEach((button) =>
-  button.addEventListener("blur", () => validPayment(false))
+  button.addEventListener("change", () => validPayment(false))
 );
-formElem.votes.addEventListener("blur", () => validVote(false));
+formElem.votes.addEventListener("change", () => validVote(false));
 formElem.description.addEventListener("blur", () => validDescription(false));
 document.forms.info.addEventListener("submit", submit);
 
