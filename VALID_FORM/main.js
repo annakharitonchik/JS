@@ -134,76 +134,232 @@ const FORM = [
 ];
 //вывожу форму на страничку
 createForm(FORM);
+const formElem = document.forms.info.elements;
+formElem.developers.addEventListener("blur", () => validDev(false));
+formElem.sitename.addEventListener("blur", () => validNameSite(false));
+formElem.siteurl.addEventListener("blur", () => validURL(false));
+formElem.sitedaterun.addEventListener("blur", () => validDate(false));
+formElem.visitors.addEventListener("blur", () => validNumVisit(false));
+formElem.email.addEventListener("blur", () => validEmail(false));
+formElem.division.addEventListener("blur", () => validRubric(false));
+const arrButtons = formElem.payment;
+arrButtons.forEach((button) =>
+  button.addEventListener("blur", () => validPayment(false))
+);
+formElem.votes.addEventListener("blur", () => validVote(false));
+formElem.description.addEventListener("blur", () => validDescription(false));
+document.forms.info.addEventListener("submit", submit);
 
-const formTag = document.forms.info;
-const INPUTS = formTag.querySelectorAll("input, textarea, select");
-INPUTS.forEach((input) => {
-  input.addEventListener("blur", () => {
-    let message = input.nextElementSibling;
-    message.style.display = "inline-block";
-    if (input.value.trim().length === 0) {
-      message.textContent = "Поле пустое!";
-    } else if (input.value.trim().length > 20 && input.type == "text") {
-      message.textContent = "Слишком длинный текст!";
-    } else if (Number(input.value) <= 0 && input.type == "number") {
-      message.textContent = "Значение некорректно! ";
-    } else if (input.type != "radio") {
-      message.style.display = "none";
-    } else if (input.type == "radio") {
-      message = INPUTS[9].nextElementSibling;
-      message.style.display = "none";
-    }
-  });
-});
-formTag.addEventListener("submit", (eo) => {
-  eo = eo || window.event;
-  let isValid = true;
-  let isChecked = false;
-  INPUTS.forEach((input) => {
-    let message = input.nextElementSibling;
-    message.style.display = "inline-block";
-
-    if (input.value.trim().length === 0) {
-      message.textContent = "Поле пустое!";
-      isValid = false;
-      input.focus();
-    } else if (input.value.trim().length > 20 && input.type == "text") {
-      message.textContent = "Слишком длинный текст!";
-      isValid = false;
-      input.focus();
-    } else if (Number(input.value) <= 0 && input.type == "number") {
-      message.textContent = "Значение некорректно! ";
-      isValid = false;
-      input.focus();
-    } else if (input.type == "checkbox") {
-      if (!input.checked) {
-        message.textContent = "Поле пустое!";
-        isValid = false;
-        message.focus();
-      } else {
-        message.style.display = "none";
-      }
-    } else if (input.tagName == "SELECT" && input.value == "1") {
-      message.textContent = "Поле пустое!";
-      isValid = false;
-    } else if (input.type != "radio") {
-      message.style.display = "none";
-    } else if (input.type == "radio") {
-      if (input.checked) {
-        isChecked = true;
-      }
-    }
-  });
-  message = INPUTS[9].nextElementSibling;
-  if (!isChecked) {
+function validDev(isErr) {
+  let errCount = 0;
+  const message = formElem.developers.nextElementSibling;
+  message.style.display = "inline-block";
+  const value = formElem.developers.value;
+  if (value.trim().length === 0) {
     message.textContent = "Поле пустое!";
-    message.focus();
-    isValid = false;
+    errCount++;
+
+    if (isErr) {
+      formElem.developers.focus();
+    }
+  } else if (value.trim().length > 20) {
+    message.textContent = "Слишком длинный текст!";
+    errCount++;
+    if (isErr) {
+      formElem.developers.focus();
+    }
   } else {
     message.style.display = "none";
   }
-
-  if (!isValid) {
+  return errCount;
+}
+function validNameSite(isErr) {
+  let errCount = 0;
+  const message = formElem.sitename.nextElementSibling;
+  message.style.display = "inline-block";
+  const value = formElem.sitename.value;
+  if (value.trim().length === 0) {
+    message.textContent = "Поле пустое!";
+    errCount++;
+    if (isErr) {
+      formElem.sitename.focus();
+    }
+  } else if (value.trim().length > 20) {
+    message.textContent = "Слишком длинный текст!";
+    errCount++;
+    if (isErr) {
+      formElem.sitename.focus();
+    }
+  } else {
+    message.style.display = "none";
+  }
+  return errCount;
+}
+function validURL(isErr) {
+  let errCount = 0;
+  const message = formElem.siteurl.nextElementSibling;
+  message.style.display = "inline-block";
+  const value = formElem.siteurl.value;
+  if (value.trim().length === 0) {
+    message.textContent = "Поле пустое!";
+    errCount++;
+    if (isErr) {
+      formElem.siteurl.focus();
+    }
+  } else if (value.trim().length > 20) {
+    message.textContent = "Слишком длинный текст!";
+    errCount++;
+    if (isErr) {
+      formElem.siteurl.focus();
+    }
+  } else {
+    message.style.display = "none";
+  }
+  return errCount;
+}
+function validDate(isErr) {
+  let errCount = 0;
+  const message = formElem.sitedaterun.nextElementSibling;
+  message.style.display = "inline-block";
+  const value = formElem.sitedaterun.value;
+  if (value.trim().length === 0) {
+    message.textContent = "Поле пустое!";
+    errCount++;
+    if (isErr) {
+      formElem.validDate.focus();
+    }
+  } else {
+    message.style.display = "none";
+  }
+  return errCount;
+}
+function validNumVisit(isErr) {
+  let errCount = 0;
+  const message = formElem.visitors.nextElementSibling;
+  message.style.display = "inline-block";
+  const value = formElem.visitors.value;
+  if (Number(value) <= 0) {
+    message.textContent = "Значение некорректно! ";
+    errCount++;
+    if (isErr) {
+      formElem.visitors.focus();
+    }
+  } else {
+    message.style.display = "none";
+  }
+  return errCount;
+}
+function validEmail(isErr) {
+  let errCount = 0;
+  const message = formElem.email.nextElementSibling;
+  message.style.display = "inline-block";
+  const value = formElem.email.value;
+  if (value.trim().length === 0) {
+    message.textContent = "Поле пустое!";
+    errCount++;
+    if (isErr) {
+      formElem.email.focus();
+    }
+  } else if (!value.includes("@")) {
+    message.textContent = "Почта некорректна! ";
+    errCount++;
+    if (isErr) {
+      formElem.email.focus();
+    }
+  } else {
+    message.style.display = "none";
+  }
+  return errCount;
+}
+function validRubric(isErr) {
+  let errCount = 0;
+  const message = formElem.division.nextElementSibling;
+  message.style.display = "inline-block";
+  const value = formElem.division.value;
+  if (value === "1") {
+    message.textContent = "Поле пустое!";
+    errCount++;
+    if (isErr) {
+      formElem.division.focus();
+    }
+  } else {
+    message.style.display = "none";
+  }
+  return errCount;
+}
+function validPayment(isErr) {
+  let errCount = 0;
+  const message =
+    formElem.payment[formElem.payment.length - 1].nextElementSibling;
+  message.style.display = "inline-block";
+  const value = formElem.payment.value;
+  if (!value) {
+    message.textContent = "Поле пустое!";
+    errCount++;
+    if (isErr) {
+      formElem.payment.focus();
+    }
+  } else {
+    message.style.display = "none";
+  }
+  return errCount;
+}
+function validVote(isErr) {
+  let errCount = 0;
+  const message = formElem.votes.nextElementSibling;
+  message.style.display = "inline-block";
+  const value = formElem.votes.value;
+  if (formElem.votes == "checked") {
+    message.style.display = "none";
+  } else {
+    message.textContent = "Поле пустое!";
+    errCount++;
+    if (isErr) {
+      formElem.votes.focus();
+    }
+  }
+  return errCount;
+}
+function validDescription(isErr) {
+  let errCount = 0;
+  const message = formElem.description.nextElementSibling;
+  message.style.display = "inline-block";
+  const value = formElem.description.value;
+  if (value.trim().length === 0) {
+    message.textContent = "Поле пустое!";
+    errCount++;
+    if (isErr) {
+      formElem.description.focus();
+    }
+  } else {
+    message.style.display = "none";
+  }
+  console.log(isErr);
+  return errCount;
+}
+function submit(eo) {
+  let errCount = 0;
+  errCount += validDev(!errCount);
+  console.log(errCount);
+  errCount += validNameSite(!errCount);
+  console.log(errCount);
+  errCount += validURL(!errCount);
+  console.log(errCount);
+  errCount += validDate(!errCount);
+  console.log(errCount);
+  errCount += validNumVisit(!errCount);
+  console.log(errCount);
+  errCount += validEmail(!errCount);
+  console.log(errCount);
+  errCount += validRubric(!errCount);
+  console.log(errCount);
+  errCount += validPayment(!errCount);
+  console.log(errCount);
+  errCount += validVote(!errCount);
+  console.log(errCount);
+  errCount += validDescription(!errCount);
+  console.log(errCount);
+  if (errCount) {
     eo.preventDefault();
   }
-});
+}
