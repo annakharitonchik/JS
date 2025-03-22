@@ -316,7 +316,6 @@ function validVote(isErr) {
     errCount++;
     if (isErr) {
       formElem.votes.focus();
-      formElem.votes.style = "border: blue";
     }
   }
   return errCount;
