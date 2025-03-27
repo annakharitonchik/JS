@@ -171,6 +171,7 @@ function validDev(isErr) {
   } else {
     message.style.display = "none";
   }
+  console.log(isErr);
   return errCount;
 }
 function validNameSite(isErr) {
@@ -334,7 +335,6 @@ function validDescription(isErr) {
   } else {
     message.style.display = "none";
   }
-  console.log(isErr);
   return errCount;
 }
 function submit(eo) {
