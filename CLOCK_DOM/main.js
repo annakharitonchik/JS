@@ -75,7 +75,7 @@ function enterDiameter(eo) {
     time.style.fontSize = diameterGreenCircle / 1.5 + "px";
     time.style.marginTop = "30%";
     yellowCircle.appendChild(time);
-    setInterval(updateTime, 1000 / 60);
+    setInterval(updateTime, 1000);
     let hours;
     let minutes;
     let seconds;
@@ -84,7 +84,7 @@ function enterDiameter(eo) {
       const currTime = new Date();
       const currTimeStr = formatTime(currTime);
       time.innerHTML = currTimeStr;
-      let secondDeg = (seconds / 60 + milliSeconds / 1000 / 60) * 360;
+      let secondDeg = (seconds / 60) * 360;
       let minuteDeg = (minutes / 60 + seconds / 60 / 60) * 360;
       let hourDeg =
         (hours / 12 + minutes / 60 / 12 + seconds / 3600 / 12) * 360;
