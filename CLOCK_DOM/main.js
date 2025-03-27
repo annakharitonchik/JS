@@ -91,6 +91,7 @@ function enterDiameter(eo) {
       secondArrow.style.transform = `rotate( ${secondDeg}deg)`;
       minuteArrow.style.transform = `rotate( ${minuteDeg}deg)`;
       hourArrow.style.transform = `rotate( ${hourDeg}deg)`;
+      console.log(seconds);
     }
     function formatTime(dt) {
       hours = dt.getHours();
