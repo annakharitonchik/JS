@@ -75,11 +75,14 @@ function enterDiameter(eo) {
     time.style.fontSize = diameterGreenCircle / 1.5 + "px";
     time.style.marginTop = "30%";
     yellowCircle.appendChild(time);
+
     setInterval(updateTime, 1000);
+
     let hours;
     let minutes;
     let seconds;
     let milliSeconds;
+    updateTime();
     function updateTime() {
       const currTime = new Date();
       const currTimeStr = formatTime(currTime);
