@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="main.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      style="
+        display: flex;
+        gap: 100px;
+        background-color: pink;
+        justify-content: center;
+        height: 100%;
+        border: 10px solid palevioletred;
+        padding-top: 20px;
+      "
+    >
+      <div>
+        <input
+          type="button"
+          value="ввод информации о напитке"
+          onclick="inputDrinkInfo()"
+        />
+        <br />
+        <br />
+        <input
+          type="button"
+          value="получение информации о напитке"
+          onclick="getDrinkInfo()"
+        />
+        <br />
+        <br />
+        <input
+          type="button"
+          value="удаление информации о напитке"
+          onclick="deleteDrinkInfo()"
+        />
+        <br />
+        <br />
+        <input
+          type="button"
+          value="перечень всех напитков"
+          onclick="listDrinks()"
+        />
+        <br />
+        <br />
+      </div>
+      <div>
+        <input
+          type="button"
+          value="ввод информации о блюде"
+          onclick="inputMealInfo()"
+        />
+        <br />
+        <br />
+        <input
+          type="button"
+          value="получение информации о блюде"
+          onclick="getMealInfo()"
+        />
+        <br />
+        <br />
+        <input
+          type="button"
+          value="удаление информации о блюде"
+          onclick="deleteMealInfo()"
+        />
+        <br />
+        <br />
+        <input type="button" value="перечень всех блюд" onclick="listMeals()" />
+        <br />
+        <br />
+      </div>
+    </div>
+  </body>
+</html>
