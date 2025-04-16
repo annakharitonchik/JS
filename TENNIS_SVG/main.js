@@ -11,8 +11,8 @@ TOP_DIV.style = "display:flex; justify-content: space-between; height:10vh";
 DIV.appendChild(TOP_DIV);
 const BUTT_START = document.querySelector("#backgroundText");
 const TEXT = document.querySelector("#text");
-TEXT.setAttribute("x", "15%");
-TEXT.setAttribute("y", "70%");
+TEXT.setAttribute("x", "17");
+TEXT.setAttribute("y", "30");
 BUTT_START.type = "button";
 BUTT_START.onclick = start;
 BUTT_START.value = "старт!";
@@ -28,29 +28,29 @@ COUNT.style =
 TOP_DIV.appendChild(COUNT);
 
 const FIELD = document.querySelector("#svg_1");
-const HEIGHT_FIELD = 60; //vh
-const WIDTH_FIELD = 80; //vh
+const HEIGHT_FIELD = 400; //vh
+const WIDTH_FIELD = 550; //vh
 FIELD.style =
   " border: solid black 0.3vh; position: relative; background-color: #f0ee7e;";
-FIELD.style.height = HEIGHT_FIELD + "vh";
-FIELD.style.width = WIDTH_FIELD + "vh";
+FIELD.setAttribute("height", HEIGHT_FIELD);
+FIELD.setAttribute("width", WIDTH_FIELD);
 DIV.appendChild(FIELD);
 
 const LEFT_RACKET = document.querySelector("#left");
 const RIGHT_RACKET = document.querySelector("#right");
 const BALL = document.querySelector("#ball");
-const RACKET_WIDTH = 4;
+const RACKET_WIDTH = 30;
 const RACKET_HEIGHT = HEIGHT_FIELD * 0.3;
 LEFT_RACKET.style = "position:absolute; ";
-LEFT_RACKET.style.width = RACKET_WIDTH + "vh";
-LEFT_RACKET.style.height = RACKET_HEIGHT + "vh";
+LEFT_RACKET.setAttribute("height", RACKET_HEIGHT);
+LEFT_RACKET.setAttribute("width", RACKET_WIDTH);
 RIGHT_RACKET.style = "position:absolute";
-RIGHT_RACKET.style.width = RACKET_WIDTH + "vh";
-RIGHT_RACKET.style.height = RACKET_HEIGHT + "vh";
-const DIAMETER_BALL = 8;
+RIGHT_RACKET.setAttribute("height", RACKET_HEIGHT);
+RIGHT_RACKET.setAttribute("width", RACKET_WIDTH);
+const DIAMETER_BALL = 55;
 BALL.style = "position:absolute;";
-BALL.setAttribute("rx", DIAMETER_BALL / 2 + "vh");
-BALL.setAttribute("ry", DIAMETER_BALL / 2 + "vh");
+BALL.setAttribute("rx", DIAMETER_BALL / 2);
+BALL.setAttribute("ry", DIAMETER_BALL / 2);
 FIELD.appendChild(LEFT_RACKET);
 FIELD.appendChild(RIGHT_RACKET);
 FIELD.appendChild(BALL);
@@ -61,7 +61,7 @@ function start() {
   BUTT_START.style.display = "none";
   COUNT.style.margin = "auto";
 }
-let RACKET_SPEED = 0.5;
+let RACKET_SPEED = 2;
 let ballH = {
   posX: WIDTH_FIELD / 2,
   posY: HEIGHT_FIELD / 2,
@@ -70,8 +70,8 @@ let ballH = {
   height: DIAMETER_BALL,
 
   update: function () {
-    BALL.setAttribute("cx", this.posX + "vh");
-    BALL.setAttribute("cy", this.posY + "vh");
+    BALL.setAttribute("cx", this.posX);
+    BALL.setAttribute("cy", this.posY);
     COUNT.textContent = `${countLeft}:${countRight}`;
   },
 };
@@ -113,8 +113,8 @@ function resetBall() {
   }
 
   alfa = (newAlfa * Math.PI) / 180;
-  ballH.speedX = 0.5;
-  RACKET_SPEED = 0.5;
+  ballH.speedX = 2;
+  RACKET_SPEED = 2;
   startTime = Date.now();
 }
 
@@ -130,8 +130,8 @@ function tick() {
     ballH.speedX = 0;
     RACKET_SPEED = 0;
   }
-  if (ballH.posY + ballH.height - DIAMETER_BALL/2 > areaH.height) {
-    ballH.posY = areaH.height - ballH.height + DIAMETER_BALL/2;
+  if (ballH.posY + ballH.height - DIAMETER_BALL / 2 > areaH.height) {
+    ballH.posY = areaH.height - ballH.height + DIAMETER_BALL / 2;
     console.log(ballH.posY);
     alfa = -alfa;
   }
@@ -155,7 +155,7 @@ function tick() {
   ) {
     ballH.posX = rightRacket.posX - ballH.width + DIAMETER_BALL / 2;
     alfa = Math.PI - alfa;
-    ballH.speedX += 0.01;
+    ballH.speedX += 0.5;
   }
 
   if (
@@ -165,7 +165,7 @@ function tick() {
   ) {
     alfa = Math.PI - alfa;
     ballH.posX = leftRacket.posX + leftRacket.width + DIAMETER_BALL / 2;
-    ballH.speedX += 0.01;
+    ballH.speedX += 0.5;
   }
 
   ballH.update();
@@ -188,8 +188,8 @@ let leftRacket = {
   height: RACKET_HEIGHT,
 
   update: function () {
-    LEFT_RACKET.setAttribute("x", this.posX + "vh");
-    LEFT_RACKET.setAttribute("y", this.posY + "vh");
+    LEFT_RACKET.setAttribute("x", this.posX );
+    LEFT_RACKET.setAttribute("y", this.posY );
   },
 };
 leftRacket.update();
@@ -202,8 +202,8 @@ let rightRacket = {
   height: RACKET_HEIGHT,
 
   update: function () {
-    RIGHT_RACKET.setAttribute("x", this.posX + "vh");
-    RIGHT_RACKET.setAttribute("y", this.posY + "vh");
+    RIGHT_RACKET.setAttribute("x", this.posX );
+    RIGHT_RACKET.setAttribute("y", this.posY );
   },
 };
 rightRacket.update();

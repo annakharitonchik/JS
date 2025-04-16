@@ -25,9 +25,9 @@ COUNT.style =
 TOP_DIV.appendChild(COUNT);
 const canvas = document.createElement("canvas");
 
-const HEIGHT_FIELD = 6000; //vh
-const WIDTH_FIELD = 8000; //vh
-const RACKET_WIDTH = 400;
+const HEIGHT_FIELD = 600; //vh
+const WIDTH_FIELD = 800; //vh
+const RACKET_WIDTH = 40;
 const RACKET_HEIGHT = 0.3 * HEIGHT_FIELD;
 canvas.setAttribute("height", HEIGHT_FIELD + "vh");
 canvas.setAttribute("width", WIDTH_FIELD + "vh");
@@ -36,7 +36,7 @@ const ctx = canvas.getContext("2d");
 ctx.fillStyle = "#f0ee7e";
 ctx.fillRect(0, 0, WIDTH_FIELD, HEIGHT_FIELD);
 
-const DIAMETER_BALL = 800;
+const DIAMETER_BALL = 80;
 let ballH = {
   posX: WIDTH_FIELD / 2,
   posY: HEIGHT_FIELD / 2,
@@ -45,7 +45,6 @@ ctx.beginPath();
 ctx.arc(ballH.posX, ballH.posY, DIAMETER_BALL / 2, 0, Math.PI * 2);
 ctx.fillStyle = "#f02137";
 ctx.fill();
-
 
 let leftRacket = {
   posX: 0,
@@ -62,9 +61,14 @@ let rightRacket = {
 ctx.fillStyle = "#191497";
 ctx.fillRect(rightRacket.posX, rightRacket.posY, RACKET_WIDTH, RACKET_HEIGHT);
 
-let RACKET_SPEED = 50;
+let RACKET_SPEED = 3;
+
+let flag = true;
 function start() {
-    setInterval(updateGame, 1000 / 60);
+  if (flag) {
+    setInterval(updateGame, 1000 / 150);
+    flag = false
+  }
   resetBall();
   BUTT_START.style.display = "none";
   COUNT.style.margin = "auto";
@@ -102,8 +106,8 @@ function resetBall() {
   }
 
   alfa = (newAlfa * Math.PI) / 180;
-  ballH.speedX = 50;
-  RACKET_SPEED = 50;
+  ballH.speedX = 2;
+  RACKET_SPEED = 3;
   startTime = Date.now();
 }
 
@@ -143,7 +147,7 @@ function tick() {
   ) {
     ballH.posX = rightRacket.posX - DIAMETER_BALL / 2;
     alfa = Math.PI - alfa;
-    ballH.speedX += 1;
+    ballH.speedX += 0.5;
   }
 
   if (
@@ -153,7 +157,7 @@ function tick() {
   ) {
     alfa = Math.PI - alfa;
     ballH.posX = leftRacket.posX + RACKET_WIDTH + DIAMETER_BALL / 2;
-    ballH.speedX += 1;
+    ballH.speedX += 0.5;
   }
 }
 
@@ -194,7 +198,6 @@ document.addEventListener("keyup", stopPress);
 function updateGame() {
   tick();
   pressKey();
-  console.log('dfd')
   ctx.fillStyle = "#f0ee7e";
   ctx.fillRect(0, 0, WIDTH_FIELD, HEIGHT_FIELD);
   ctx.beginPath();
@@ -207,4 +210,3 @@ function updateGame() {
   ctx.fillRect(rightRacket.posX, rightRacket.posY, RACKET_WIDTH, RACKET_HEIGHT);
   COUNT.textContent = `${countLeft}:${countRight}`;
 }
-

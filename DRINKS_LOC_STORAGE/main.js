@@ -1,29 +1,31 @@
 class LocStorageClass {
-  constructor() {
-    this.Storage = {};
-    for (let i = 0; i < localStorage.length; i++) {
-      let key = localStorage.key(i);
-      let value = localStorage.getItem(key);
-      this.Storage[key] = JSON.parse(value);
+  constructor(keyStorage) {
+    this.keyStorage = keyStorage;
+    let value = localStorage.getItem(this.keyStorage);
+    if (value) {
+      this.Storage = JSON.parse(value);
+    } else {
+      this.Storage = {};
     }
   }
   //addValue(key,value)
   addValue(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
     this.Storage[key] = value;
+    localStorage.setItem(this.keyStorage, JSON.stringify(this.Storage));
   }
 
   //getValue(key)
   getValue(key) {
-    JSON.parse(localStorage.getItem(key));
+    JSON.parse(localStorage.getItem(this.Storage[key]));
     return this.Storage[key];
   }
 
   //deleteValue(key)
   deleteValue(key) {
     if (this.Storage.hasOwnProperty(key)) {
-      localStorage.removeItem(key);
-      delete this.Storage[key];
+      JSON.parse(localStorage.getItem(this.Storage[key]))
+      delete this.Storage[key] ;
+    localStorage.setItem(this.keyStorage, JSON.stringify(this.Storage));
       return true;
     } else {
       return false;
@@ -36,8 +38,8 @@ class LocStorageClass {
   }
 }
 // объект drinkStorage класса ObjStorageClass
-const drinkStorage = new LocStorageClass();
-const mealStorage = new LocStorageClass();
+const drinkStorage = new LocStorageClass("drinks");
+const mealStorage = new LocStorageClass("meals");
 
 //«ввод информации о напитке»
 function inputDrinkInfo() {
@@ -92,7 +94,7 @@ function inputMealInfo() {
   let kitchen = prompt("Вид кухни?", "Итальянская");
   let recipe = prompt(
     "Введите рецепт блюда",
-    "мука, вода, дрожжи, соль, сахар, оливковое масло, томатный соус, моцарелла, помидоры, базилик"
+    "мука, вода, дрожжи, соль, сахар, оливковое масло, томатный соус"
   );
   let info = { kitchen, recipe };
   mealStorage.addValue(nameMeal, info);
